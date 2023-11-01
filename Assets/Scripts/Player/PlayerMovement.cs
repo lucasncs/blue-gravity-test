@@ -4,20 +4,27 @@ namespace Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private float _speed = 5;
+        [SerializeField] private Rigidbody2D _rigidbody;
+        [SerializeField] private float _movementSpeed = 5;
 
-        private Transform _transform;
-
-        private void Awake()
-        {
-            _transform = transform;
-        }
+        private Vector2 _movementNormalized;
 
         private void Update()
         {
-            Vector3 movementNormalized = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+            _movementNormalized = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+        }
 
-            _transform.position += movementNormalized * (_speed * Time.deltaTime);
+        private void FixedUpdate()
+        {
+            _rigidbody.velocity = _movementNormalized * _movementSpeed;
+        }
+
+        private void OnValidate()
+        {
+            if (TryGetComponent(out Rigidbody2D rigidbody2D))
+            {
+                _rigidbody = rigidbody2D;
+            }
         }
     }
 }

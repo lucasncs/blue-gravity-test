@@ -595,7 +595,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.5}
@@ -772,6 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36c275bac7a4ca7a787f414fc804cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 1549416713}
   _speed: 5
 --- !u!70 &1549416711
 CapsuleCollider2D:
@@ -842,7 +843,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _interactionKey: 101
-  _interactionRadius: 2
+  _interactionRadius: 1
 --- !u!1001 &4034383206556613217
 PrefabInstance:
   m_ObjectHideFlags: 0
