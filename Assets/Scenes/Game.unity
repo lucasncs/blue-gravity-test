@@ -569,6 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8edf4b23814c41a002bea94182d394, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemsOnShop: {fileID: 11400000, guid: 78ecd05d386beea4d8eae79504b79fae, type: 2}
+  _shopPurchasePriceMultiplier: 1.2
 --- !u!1 &1529118064
 GameObject:
   m_ObjectHideFlags: 0

@@ -88,6 +88,9 @@ namespace Character.Avatar
                 case ItemSlotType.Feet:
                     ApplyFeet(avatarItem as FeetItem);
                     break;
+                case ItemSlotType.Holdable:
+                    ApplyWeapon(avatarItem as WeaponItem);
+                    break;
                 case ItemSlotType.Unknown:
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -117,6 +120,9 @@ namespace Character.Avatar
                     break;
                 case ItemSlotType.Feet:
                     ApplyFeet(_defaultAvatar.FeetItem);
+                    break;
+                case ItemSlotType.Holdable:
+                    ApplyWeapon(_defaultAvatar.WeaponItem);
                     break;
                 case ItemSlotType.Unknown:
                 default:
@@ -162,10 +168,8 @@ namespace Character.Avatar
             LoadAssetToRenderer(_rendFootRight, item.FootRightSpriteAsset, ref _handleFootRight);
         }
 
-        public void ApplyWeapon(WeaponItem weaponItem)
+        private void ApplyWeapon(WeaponItem weaponItem)
         {
-            if (weaponItem == null) return;
-
             LoadAssetToRenderer(_rendWeaponLeft, weaponItem.SpriteAsset, ref _handleWeaponLeft);
             LoadAssetToRenderer(_rendWeaponRight, weaponItem.SpriteAsset, ref _handleWeaponRight);
         }

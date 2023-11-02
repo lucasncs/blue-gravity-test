@@ -5,11 +5,11 @@ namespace Interaction
 {
     public class InteractionEvent : MonoBehaviour, IInteractable
     {
-        public UnityEvent OnInteraction;
+        public UnityEvent<IInteractor> OnInteraction;
 
-        public void Interact()
+        public void Interact(IInteractor interactor)
         {
-            OnInteraction.Invoke();
+            OnInteraction.Invoke(interactor);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Character.Avatar
         [SerializeField] private HandsItem _handsItem;
         [SerializeField] private LowerBodyItem _lowerBodyItem;
         [SerializeField] private FeetItem _feetItem;
+        [SerializeField] private WeaponItem _weaponItem;
 
         public HatItem HatItem => _hatItem;
         public HeadFaceItem HeadFaceItem => _faceItem;
@@ -19,5 +20,6 @@ namespace Character.Avatar
         public HandsItem HandsItem => _handsItem;
         public LowerBodyItem LowerBodyItem => _lowerBodyItem;
         public FeetItem FeetItem => _feetItem;
+        public WeaponItem WeaponItem => _weaponItem;
     }
 }

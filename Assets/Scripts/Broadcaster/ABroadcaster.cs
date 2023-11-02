@@ -43,7 +43,8 @@ namespace Broadcaster
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"[{typeof(T).Name}] Error: {e.Message} \n StackTrace: {e.StackTrace}");
+                    Debug.LogError(
+                        $"[{typeof(T).Name}] Error: {e.Message} \n StackTrace: {e.StackTrace}\n InnerException: {e.InnerException}");
                 }
             }
         }

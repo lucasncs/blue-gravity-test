@@ -1,8 +1,9 @@
+using UnityEngine;
 using WindowManagement;
 
-namespace Store.ClothingShop
+namespace UI.PlayerInventory
 {
-    public class ClothingShopWindow : AWindowController
+    public class PlayerInventoryWindow : AWindowController
     {
         protected internal override void Show(IWindowIntent intent = null)
         {

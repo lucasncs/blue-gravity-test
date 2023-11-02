@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Character.Player
 {
-    public class PlayerInteraction : MonoBehaviour
+    public class PlayerInteraction : MonoBehaviour, IInteractor
     {
         [SerializeField] private LayerMask _interactionLayer;
         [SerializeField] private KeyCode _interactionKey = KeyCode.E;
@@ -29,7 +29,12 @@ namespace Character.Player
         {
             if (!_canInteract || !Input.GetKeyDown(_interactionKey)) return;
 
-            _possibleInteractable.Interact();
+            _possibleInteractable.Interact(this);
+        }
+
+        public GameObject GetGameObject()
+        {
+            return gameObject;
         }
 
         private void OnDrawGizmosSelected()

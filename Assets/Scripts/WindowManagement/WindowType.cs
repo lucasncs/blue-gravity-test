@@ -2,7 +2,7 @@ namespace WindowManagement
 {
     public enum WindowType
     {
-        None = -1,
+        None,
         PlayerInventory,
         ClothingShop,
     }

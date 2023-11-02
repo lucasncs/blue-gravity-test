@@ -31,14 +31,14 @@ namespace AssetCollection
             return true;
         }
 
-        public T Find(Func<T,bool> predicate)
+        public T Find(Func<T, bool> predicate)
         {
             return _collection.FirstOrDefault(predicate);
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _collection.GetEnumerator() as IEnumerator<T> ?? throw new InvalidOperationException();
+            return _collection.AsEnumerable().GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
