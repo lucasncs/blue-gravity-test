@@ -1,15 +1,20 @@
 using System.Collections.Generic;
+using System.Linq;
 using ItemInventory;
 using Items;
 using Items.Avatar;
+using UI.PlayerInventory;
 using UnityEngine;
+using WindowManagement;
 
 namespace Character.Player.InventoryManagement
 {
-    public class PlayerInventory : MonoBehaviour, IInventoryProvider,
-        IPlayerInventoryMessageListener<PlayerChangeEquippedItem>
+    public class PlayerInventory : MonoBehaviour, IInventoryProvider, IEquippedItems, IPlayerInventoryWindowDataSource,
+        IPlayerInventoryMessageListener<PlayerChangeEquippedItemMessage>,
+        IPlayerInventoryMessageListener<PlayerCurrencyUpdateRequestMessage>
     {
-        [SerializeField] private ItemCollection _itemDatabase;
+        [SerializeField] private ItemDatabase _itemDatabase;
+        [SerializeField] private KeyCode _openInventoryKey;
 
         private readonly Inventory _inventory = new();
 
@@ -28,14 +33,23 @@ namespace Character.Player.InventoryManagement
         {
             _inventory.OnItemAdded += OnItemAdded;
             _inventory.OnItemRemoved += OnItemRemoved;
-            PlayerInventoryBroadcaster.Instance.Subscribe<PlayerChangeEquippedItem>(this);
+            PlayerInventoryBroadcaster.Instance.Subscribe<PlayerChangeEquippedItemMessage>(this);
         }
 
         private void OnDestroy()
         {
             _inventory.OnItemAdded -= OnItemAdded;
             _inventory.OnItemRemoved -= OnItemRemoved;
-            PlayerInventoryBroadcaster.Instance.Unsubscribe<PlayerChangeEquippedItem>(this);
+            PlayerInventoryBroadcaster.Instance.Unsubscribe<PlayerChangeEquippedItemMessage>(this);
+        }
+
+        private void Update()
+        {
+            if (!Input.GetKeyDown(_openInventoryKey)) return;
+
+            WindowManagementBroadcaster.Instance.Broadcast(
+                new ShowWindowMessage(WindowType.PlayerInventory,
+                    intent: new PlayerInventoryWindowIntent(this)));
         }
 
         private void OnItemAdded(InventoryEntry item)
@@ -63,7 +77,8 @@ namespace Character.Player.InventoryManagement
             {
                 if (slotItemPair.Value == item.Id)
                 {
-                    PlayerInventoryBroadcaster.Instance.Broadcast(new PlayerChangeEquippedItem(slotItemPair.Key, 0));
+                    PlayerInventoryBroadcaster.Instance.Broadcast(
+                        new PlayerChangeEquippedItemMessage(slotItemPair.Key, 0));
                     break;
                 }
             }
@@ -76,7 +91,37 @@ namespace Character.Player.InventoryManagement
             return _inventory;
         }
 
-        public void OnMessageReceived(PlayerChangeEquippedItem message)
+        public int GetEquippedItem(ItemSlotType slotType)
+        {
+            return _equippedItems.TryGetValue(slotType, out int itemId) ? itemId : 0;
+        }
+
+        public IEnumerable<int> GetAllEquippedItems()
+        {
+            return _equippedItems.Values;
+        }
+
+        public IEnumerable<InventoryListEntry> GetAllItems()
+        {
+            foreach (InventoryEntry entry in _inventory)
+            {
+                AItem item = GetItem(entry.Id);
+                if (item is CurrencyItem || _equippedItems.ContainsValue(item.Id)) continue;
+                yield return new InventoryListEntry { Item = item, Amount = entry.Amount };
+            }
+        }
+
+        public IReadOnlyDictionary<ItemSlotType, AAvatarItem> GetEquippedItems()
+        {
+            return _equippedItems.ToDictionary(pair => pair.Key, pair => GetItem(pair.Value) as AAvatarItem);
+        }
+
+        public AItem GetItem(int id)
+        {
+            return _itemDatabase.GetItem(id);
+        }
+
+        public void OnMessageReceived(PlayerChangeEquippedItemMessage message)
         {
             var foundItem = _itemDatabase.GetItem(message.NewEquippedItemId) as AAvatarItem;
 
@@ -85,10 +130,38 @@ namespace Character.Player.InventoryManagement
             _equippedItems[message.SlotToChange] = foundItem != null ? message.NewEquippedItemId : 0;
 
             PlayerInventoryBroadcaster.Instance.Broadcast(
-                new PlayerEquippedItemUpdated(
+                new PlayerEquippedItemUpdatedMessage(
                     message.SlotToChange,
                     foundItem != null && _inventory.HasItem(message.NewEquippedItemId) ? foundItem : null
                 ));
+        }
+
+        public void OnMessageReceived(PlayerCurrencyUpdateRequestMessage message)
+        {
+            if (message.Currency == null)
+            {
+                CurrencyItem currencyItem = null;
+                int currencyAmount = 0;
+                foreach (InventoryEntry entry in _inventory)
+                {
+                    if (GetItem(entry.Id) is CurrencyItem item)
+                    {
+                        currencyItem = item;
+                        currencyAmount = entry.Amount;
+                        break;
+                    }
+                }
+
+                PlayerInventoryBroadcaster.Instance.Broadcast(
+                    new PlayerCurrencyUpdateMessage(currencyItem, currencyAmount));
+
+                return;
+            }
+
+            PlayerInventoryBroadcaster.Instance.Broadcast(
+                new PlayerCurrencyUpdateMessage(
+                    message.Currency,
+                    _inventory.GetItemAmount(message.Currency.Id)));
         }
     }
 }

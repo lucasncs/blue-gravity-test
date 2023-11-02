@@ -4,7 +4,7 @@ using Character.Player.InventoryManagement;
 namespace Character.Player
 {
     public class PlayerAvatarController : HumanoidCharacterAvatarController,
-        IPlayerInventoryMessageListener<PlayerEquippedItemUpdated>
+        IPlayerInventoryMessageListener<PlayerEquippedItemUpdatedMessage>
     {
         protected override void Awake()
         {
@@ -20,7 +20,7 @@ namespace Character.Player
             base.OnDestroy();
         }
 
-        public void OnMessageReceived(PlayerEquippedItemUpdated message)
+        public void OnMessageReceived(PlayerEquippedItemUpdatedMessage message)
         {
             if (message.NewEquippedItem != null)
             {

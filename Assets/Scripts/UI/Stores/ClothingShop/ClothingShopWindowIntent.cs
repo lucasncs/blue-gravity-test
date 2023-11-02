@@ -1,23 +1,14 @@
-using ItemInventory;
-using Items;
 using WindowManagement;
 
 namespace UI.Stores.ClothingShop
 {
     public struct ClothingShopWindowIntent : IWindowIntent
     {
-        public readonly IInventoryProvider PlayerInventoryProvider;
-        public readonly ItemCollection ItemsOnShop;
-        public readonly float ShopPurchasePriceMultiplier;
+        public readonly IClothingShopWindowDataSource DataSource;
 
-        public ClothingShopWindowIntent(
-            IInventoryProvider playerInventoryProvider,
-            ItemCollection itemsOnShop,
-            float shopPurchasePriceMultiplier)
+        public ClothingShopWindowIntent(IClothingShopWindowDataSource dataSource)
         {
-            PlayerInventoryProvider = playerInventoryProvider;
-            ItemsOnShop = itemsOnShop;
-            ShopPurchasePriceMultiplier = shopPurchasePriceMultiplier;
+            DataSource = dataSource;
         }
     }
 }

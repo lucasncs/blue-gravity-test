@@ -30,6 +30,16 @@ namespace Character.Player.PurchaseManagement
             Buyer = buyer;
         }
     }
-    
-    // TODO: Make sell item message
+
+    public struct SellItemMessage : IPurchaseMessage
+    {
+        public readonly AItem Item;
+        public readonly IReadOnlyInventory Seller;
+
+        public SellItemMessage(AItem item, IReadOnlyInventory seller)
+        {
+            Item = item;
+            Seller = seller;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Character.Player.InventoryManagement;
 using Character.Player.PurchaseManagement;
 using Items;
 using Money;
@@ -8,29 +9,46 @@ using WindowManagement;
 
 namespace UI.Stores.ClothingShop
 {
-    public class ClothingShopWindow : AWindowController
+    public class ClothingShopWindow : AWindowController,
+        IPlayerInventoryMessageListener<PlayerInventoryUpdateMessage>
     {
         [SerializeField] private ClothingShopWindowView _windowView;
 
-        private ClothingShopWindowDataSource _dataSource;
+        private IClothingShopWindowDataSource _dataSource;
 
         private void Awake()
         {
             _windowView.OnCloseWindowButtonClick += OnCloseWindowButtonClicked;
-            _windowView.OnItemCellSelect += OnItemCellSelected;
+            _windowView.OnPurchaseItemCellSelect += OnBuyItemCellSelected;
+            _windowView.OnSellItemCellSelect += OnSellItemCellSelected;
+
+            PlayerInventoryBroadcaster.Instance.Subscribe(this);
+        }
+
+        private void OnDestroy()
+        {
+            PlayerInventoryBroadcaster.Instance.Unsubscribe(this);
         }
 
         private void OnCloseWindowButtonClicked()
         {
         }
 
-        private void OnItemCellSelected(ShopItemData shopItemData)
+        private void OnBuyItemCellSelected(ShopItemData shopItemData)
         {
             PurchaseBroadcaster.Instance.Broadcast(
                 new PurchaseItemMessage(
                     shopItemData.Item,
                     shopItemData.ShopPrice,
-                    _dataSource.PlayerInventoryProvider.GetInventory()));
+                    _dataSource.GetInventory()));
+        }
+
+        private void OnSellItemCellSelected(AItem item)
+        {
+            PurchaseBroadcaster.Instance.Broadcast(
+                new SellItemMessage(
+                    item,
+                    _dataSource.GetInventory()));
         }
 
         protected internal override void Show(IWindowIntent intent = null)
@@ -38,15 +56,20 @@ namespace UI.Stores.ClothingShop
             if (intent == null) throw new ArgumentNullException();
             if (!(intent is ClothingShopWindowIntent windowIntent)) throw new InvalidCastException();
 
-            _dataSource = new ClothingShopWindowDataSource(windowIntent);
+            _dataSource = windowIntent.DataSource;
 
-            var shopItemsDataList = new List<ShopItemData>(_dataSource.ItemsOnShop.Length);
-            foreach (AItem item in _dataSource.ItemsOnShop)
+            SetupView();
+        }
+
+        private void SetupView()
+        {
+            var shopItemsDataList = new List<ShopItemData>(_dataSource.GetAllItemsOnShop().Length);
+            foreach (AItem item in _dataSource.GetAllItemsOnShop())
             {
                 if (!item.Price.IsValid()) continue;
 
-                int currentMoney = _dataSource.PlayerInventoryProvider.GetInventory().GetItemAmount(item.Price.Type.Id);
-                Price itemPurchasePrice = item.Price * windowIntent.ShopPurchasePriceMultiplier;
+                int currentMoney = _dataSource.GetInventory().GetItemAmount(item.Price.Type.Id);
+                Price itemPurchasePrice = _dataSource.CalculateSellingPrice(item.Price);
                 shopItemsDataList.Add(new ShopItemData
                 {
                     Item = item,
@@ -55,11 +78,17 @@ namespace UI.Stores.ClothingShop
                 });
             }
 
-            _windowView.Setup(shopItemsDataList);
+            _windowView.Setup(shopItemsDataList, _dataSource.GetAllItems());
         }
 
         protected internal override void OnCloseWindow()
         {
+        }
+
+        public void OnMessageReceived(PlayerInventoryUpdateMessage message)
+        {
+            // Not ideal, but it'll do for now
+            SetupView();
         }
     }
 }

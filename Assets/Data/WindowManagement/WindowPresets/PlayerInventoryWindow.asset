@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerInventoryWindow
   m_EditorClassIdentifier: 
   _type: 1
-  _window: {fileID: 0}
+  _window: {fileID: 6845006988593824027, guid: 33d12db7ede017b4a94a6c9fbc99a635, type: 3}

@@ -96,7 +96,7 @@ namespace WindowManagement
         private void Update()
         {
             if (!Input.GetKeyUp(KeyCode.Escape)) return;
-            CloseCurrentWindow();
+            WindowManagementBroadcaster.Instance.Broadcast(new CloseWindowMessage());
         }
 
         private struct WindowStruct

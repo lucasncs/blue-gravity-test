@@ -67,6 +67,8 @@ namespace ItemInventory
             item.Decrement(quantity);
             _items[id] = item;
 
+            if (item.Amount < 1) _items.Remove(id);
+
             OnItemRemoved?.Invoke(item);
         }
 
@@ -88,6 +90,11 @@ namespace ItemInventory
         public int GetItemAmount(int id)
         {
             return _items.TryGetValue(id, out InventoryEntry item) ? item.Amount : 0;
+        }
+
+        public IEnumerable<InventoryEntry> GetAllItems()
+        {
+            return _items.Values.AsEnumerable();
         }
 
         public IEnumerator<InventoryEntry> GetEnumerator()

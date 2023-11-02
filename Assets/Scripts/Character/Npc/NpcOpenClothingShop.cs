@@ -10,14 +10,17 @@ namespace Character.Npc
     public class NpcOpenClothingShop : MonoBehaviour, IInteractable
     {
         [SerializeField] private ItemCollection _itemsOnShop;
+        [SerializeField] private ItemDatabase _itemDatabase;
         [SerializeField] private float _shopPurchasePriceMultiplier = 1;
 
         public void OpenClothingShopWindow(IInventoryProvider playerInventoryProvider)
         {
             var intent = new ClothingShopWindowIntent(
-                playerInventoryProvider,
-                _itemsOnShop,
-                _shopPurchasePriceMultiplier);
+                new ClothingShopWindowDataSource(
+                    playerInventoryProvider,
+                    _itemsOnShop,
+                    _shopPurchasePriceMultiplier,
+                    _itemDatabase));
 
             WindowManagementBroadcaster.Instance.Broadcast(
                 new ShowWindowMessage(
