@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a674c2aabfc40959dd34d87ffacc2ed, type: 3}
+  m_Name: ID-4-LeatherCoat
+  m_EditorClassIdentifier: 
+  _id: 4
+  _icon:
+    m_AssetGUID: 215dd6c48c732d744aecd29e7fecbbfa
+    m_SubObjectName: Rogue_torso_01
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _name: Leather Coat
+  _torsoSpriteAsset:
+    m_AssetGUID: 215dd6c48c732d744aecd29e7fecbbfa
+    m_SubObjectName: Rogue_torso_01
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _shoulderLeftSpriteAsset:
+    m_AssetGUID: aa3c97470a4d5234ea50591a35ff9616
+    m_SubObjectName: Rogue_shoulder_l_01
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _shoulderRightSpriteAsset:
+    m_AssetGUID: 9af6155338c0e8f4ab8f5bb30b4c586e
+    m_SubObjectName: Rogue_shoulder_r_01
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0

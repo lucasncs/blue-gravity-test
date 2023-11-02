@@ -13,7 +13,7 @@ namespace Character.Avatar
         [SerializeField] private LowerBodyItem _lowerBodyItem;
         [SerializeField] private FeetItem _feetItem;
 
-        public HatItem Item => _hatItem;
+        public HatItem HatItem => _hatItem;
         public HeadFaceItem HeadFaceItem => _faceItem;
         public UpperBodyItem UpperBodyItem => _upperBodyItem;
         public HandsItem HandsItem => _handsItem;

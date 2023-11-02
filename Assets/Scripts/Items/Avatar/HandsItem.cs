@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Items.Avatar
 {
-    [CreateAssetMenu(menuName = "Item/Avatar/Hands", fileName = "HandsItem")]
+    [CreateAssetMenu(menuName = "Item/Avatar/Hands", fileName = "HandsItem", order = 3)]
     public class HandsItem : AAvatarItem
     {
         [SerializeField] private AssetReferenceSprite _wristLeftSpriteAsset;

@@ -29,6 +29,11 @@ namespace Character.Avatar
         [SerializeField] private SpriteRenderer _rendLegRight;
         [SerializeField] private SpriteRenderer _rendPelvis;
 
+        [Header("Default Avatar (Optional)")]
+
+        [SerializeField] private HumanoidAvatarPreset _defaultAvatar;
+        [SerializeField] private bool _loadPresetOnAwake = true;
+
         private AsyncOperationHandle<Sprite> _handleHead;
         private AsyncOperationHandle<Sprite> _handleFace;
         private AsyncOperationHandle<Sprite> _handleHat;
@@ -46,6 +51,18 @@ namespace Character.Avatar
         private AsyncOperationHandle<Sprite> _handleFootRight;
         private AsyncOperationHandle<Sprite> _handleLegRight;
         private AsyncOperationHandle<Sprite> _handlePelvis;
+
+        private void Awake()
+        {
+            if (!_loadPresetOnAwake || _defaultAvatar == null) return;
+
+            ApplyAvatarItem(_defaultAvatar.HatItem);
+            ApplyAvatarItem(_defaultAvatar.HeadFaceItem);
+            ApplyAvatarItem(_defaultAvatar.UpperBodyItem);
+            ApplyAvatarItem(_defaultAvatar.HandsItem);
+            ApplyAvatarItem(_defaultAvatar.LowerBodyItem);
+            ApplyAvatarItem(_defaultAvatar.FeetItem);
+        }
 
         public override void ApplyAvatarItem(AAvatarItem avatarItem)
         {
@@ -70,6 +87,36 @@ namespace Character.Avatar
                     break;
                 case ItemSlotType.Feet:
                     ApplyFeet(avatarItem as FeetItem);
+                    break;
+                case ItemSlotType.Unknown:
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
+        public void RemoveAvatarItem(ItemSlotType slotType)
+        {
+            if (_defaultAvatar == null) return;
+
+            switch (slotType)
+            {
+                case ItemSlotType.Hat:
+                    ApplyHat(_defaultAvatar.HatItem);
+                    break;
+                case ItemSlotType.HeadFace:
+                    ApplyHeadFace(_defaultAvatar.HeadFaceItem);
+                    break;
+                case ItemSlotType.UpperBody:
+                    ApplyUpperBody(_defaultAvatar.UpperBodyItem);
+                    break;
+                case ItemSlotType.Hands:
+                    ApplyHands(_defaultAvatar.HandsItem);
+                    break;
+                case ItemSlotType.LowerBody:
+                    ApplyLowerBody(_defaultAvatar.LowerBodyItem);
+                    break;
+                case ItemSlotType.Feet:
+                    ApplyFeet(_defaultAvatar.FeetItem);
                     break;
                 case ItemSlotType.Unknown:
                 default:

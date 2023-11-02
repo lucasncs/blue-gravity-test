@@ -3,7 +3,7 @@ using UnityEngine.AddressableAssets;
 
 namespace Items.Avatar
 {
-    [CreateAssetMenu(menuName = "Item/Avatar/Upper Body", fileName = "UpperBodyItem")]
+    [CreateAssetMenu(menuName = "Item/Avatar/Upper Body", fileName = "UpperBodyItem", order = 2)]
     public class UpperBodyItem : AAvatarItem
     {
         [SerializeField] private AssetReferenceSprite _torsoSpriteAsset;
