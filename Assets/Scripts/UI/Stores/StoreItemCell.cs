@@ -26,11 +26,11 @@ namespace UI.Stores
             DisposeAllHandles();
 
             _itemIcon.enabled = false;
-            _itemIconHandle = item.Icon.LoadAssetAsync();
+            _itemIconHandle = Addressables.LoadAssetAsync<Sprite>(item.Icon);
             _itemIconHandle.Completed += handle => ApplySprite(_itemIcon, handle.Result);
 
             _priceCurrencyIcon.enabled = false;
-            _currencyIconHandle = price.Type.Icon.LoadAssetAsync();
+            _currencyIconHandle = Addressables.LoadAssetAsync<Sprite>(price.Type.Icon);
             _currencyIconHandle.Completed += handle => ApplySprite(_priceCurrencyIcon, handle.Result);
 
             _itemName.text = item.Name;

@@ -283,6 +283,19 @@ MonoBehaviour:
     m_Bits: 64
   _interactionKey: 101
   _interactionRadius: 1
+--- !u!114 &3145077895612852440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436736580493397424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63548fd50f564e6cacc6c8c85238b1a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemDatabase: {fileID: 11400000, guid: 78ecd05d386beea4d8eae79504b79fae, type: 2}
 --- !u!114 &4731017958234259488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,18 +324,6 @@ MonoBehaviour:
   _rigidbody: {fileID: 6401086789255193042}
   _animator: {fileID: 7147263410773872010}
   _movementSpeed: 5
---- !u!114 &3145077895612852440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436736580493397424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63548fd50f564e6cacc6c8c85238b1a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &6401086789255193042 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 9165894198424160933, guid: 963fda53ff4e1b940834ad93a9f7a527, type: 3}

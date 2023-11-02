@@ -65,6 +65,7 @@ namespace ItemInventory
         {
             if (!_items.TryGetValue(id, out InventoryEntry item)) return;
             item.Decrement(quantity);
+            _items[id] = item;
 
             OnItemRemoved?.Invoke(item);
         }

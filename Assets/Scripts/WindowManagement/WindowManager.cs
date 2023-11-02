@@ -33,6 +33,12 @@ namespace WindowManagement
             WindowManagementBroadcaster.Instance.Subscribe<CloseWindowMessage>(this);
         }
 
+        private void OnDestroy()
+        {
+            WindowManagementBroadcaster.Instance.Unsubscribe<ShowWindowMessage>(this);
+            WindowManagementBroadcaster.Instance.Unsubscribe<CloseWindowMessage>(this);
+        }
+
         public AWindowController ShowWindow(WindowType windowType,
             Action onCloseAction = null,
             IWindowIntent intent = null,
@@ -91,12 +97,6 @@ namespace WindowManagement
         {
             if (!Input.GetKeyUp(KeyCode.Escape)) return;
             CloseCurrentWindow();
-        }
-
-        private void OnDestroy()
-        {
-            WindowManagementBroadcaster.Instance.Unsubscribe<ShowWindowMessage>(this);
-            WindowManagementBroadcaster.Instance.Unsubscribe<CloseWindowMessage>(this);
         }
 
         private struct WindowStruct

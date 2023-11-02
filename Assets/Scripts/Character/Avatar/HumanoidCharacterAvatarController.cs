@@ -52,7 +52,7 @@ namespace Character.Avatar
         private AsyncOperationHandle<Sprite> _handleLegRight;
         private AsyncOperationHandle<Sprite> _handlePelvis;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             if (!_loadPresetOnAwake || _defaultAvatar == null) return;
 
@@ -178,7 +178,7 @@ namespace Character.Avatar
             ref AsyncOperationHandle<Sprite> handle)
         {
             DisposeHandle(handle);
-            handle = asset.LoadAssetAsync();
+            handle = Addressables.LoadAssetAsync<Sprite>(asset);
             rend.sprite = handle.WaitForCompletion();
         }
 
@@ -188,7 +188,7 @@ namespace Character.Avatar
             Addressables.Release(handle);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             DisposeAllHandles();
         }

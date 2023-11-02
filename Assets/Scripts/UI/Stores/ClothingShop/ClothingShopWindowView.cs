@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
+using Character.Player.InventoryManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using WindowManagement;
 
 namespace UI.Stores.ClothingShop
 {
-    public class ClothingShopWindowView : MonoBehaviour
+    public class ClothingShopWindowView : MonoBehaviour,
+        IPlayerInventoryMessageListener<PlayerCurrencyUpdateMessage>
     {
         [SerializeField] private StoreItemCell _itemCellPrefab;
         [SerializeField] private RectTransform _itemCellsParent;
@@ -20,6 +22,12 @@ namespace UI.Stores.ClothingShop
         private void Awake()
         {
             _closeWindowButton.onClick.AddListener(OnCloseWindowButtonClicked);
+            PlayerInventoryBroadcaster.Instance.Subscribe(this);
+        }
+
+        private void OnDestroy()
+        {
+            PlayerInventoryBroadcaster.Instance.Unsubscribe(this);
         }
 
         private void OnCloseWindowButtonClicked()
@@ -54,6 +62,16 @@ namespace UI.Stores.ClothingShop
         private void OnItemCellSelected(StoreItemCell cell)
         {
             OnItemCellSelect?.Invoke(_storeItemCells[cell]);
+        }
+
+        public void OnMessageReceived(PlayerCurrencyUpdateMessage message)
+        {
+            foreach (KeyValuePair<StoreItemCell, ShopItemData> cellPair in _storeItemCells)
+            {
+                if (cellPair.Value.ShopPrice.Type.Id != message.Currency.Id) continue;
+
+                cellPair.Key.SetCellState(message.CurrentAmount >= cellPair.Value.ShopPrice.Value);
+            }
         }
     }
 }
