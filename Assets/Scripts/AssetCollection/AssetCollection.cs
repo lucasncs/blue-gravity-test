@@ -46,7 +46,7 @@ namespace AssetCollection
             return GetEnumerator();
         }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
             if (Length == 0) return;
 

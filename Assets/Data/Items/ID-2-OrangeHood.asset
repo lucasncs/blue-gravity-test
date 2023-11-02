@@ -20,6 +20,9 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     m_EditorAssetChanged: 0
   _name: Orange Hood
+  _price:
+    _type: {fileID: 11400000, guid: f953f602f2a09af4fb41f843d563ba78, type: 2}
+    _value: 50
   _spriteAsset:
     m_AssetGUID: 468244f274f38f64b85773c7888444b6
     m_SubObjectName: Rogue_hood_01

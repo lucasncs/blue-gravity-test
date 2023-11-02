@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Items.Avatar
 {
     public abstract class AAvatarItem : AItem
@@ -16,5 +14,6 @@ namespace Items.Avatar
         Hands,
         LowerBody,
         Feet,
+        Holdable,
     }
 }

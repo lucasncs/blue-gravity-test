@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533483ee139a4ec6a42560cd6c17e7eb, type: 3}
+  m_Name: ID-1000-SoftCurrency
+  m_EditorClassIdentifier: 
+  _id: 1000
+  _icon:
+    m_AssetGUID: d2c0dc76eca05bb4eb4f3fc4a37f258d
+    m_SubObjectName: Coin
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _name: Gold
