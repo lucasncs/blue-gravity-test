@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbc838888db401480ff54d39f20f615, type: 3}
+  m_Name: ID-18-EpicDaggers
+  m_EditorClassIdentifier: 
+  _id: 18
+  _icon:
+    m_AssetGUID: 5d7ff4b982784f843b12c8448e652a36
+    m_SubObjectName: Rogue_weapon_006
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _name: Epic Daggers
+  _price:
+    _type: {fileID: 11400000, guid: f953f602f2a09af4fb41f843d563ba78, type: 2}
+    _value: 100
+  _spriteAsset:
+    m_AssetGUID: 37e05d8dcd5e386498e75d924efbc7c1
+    m_SubObjectName: Rogue_weapon_06
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0

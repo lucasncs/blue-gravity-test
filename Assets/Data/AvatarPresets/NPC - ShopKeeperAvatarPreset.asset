@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d375545ce08e4329a58db902cfb16ef7, type: 3}
+  m_Name: NPC - ShopKeeperAvatarPreset
+  m_EditorClassIdentifier: 
+  _hatItem: {fileID: 11400000, guid: cfcfd516bde44d346b428fc5bfde71af, type: 2}
+  _faceItem: {fileID: 11400000, guid: cb69ea6f405b8f74699aafb3df660dc9, type: 2}
+  _upperBodyItem: {fileID: 11400000, guid: ba1f293e5b76f954aac4f4c7026a95c8, type: 2}
+  _handsItem: {fileID: 11400000, guid: ef7ad69a05cf768469f32df483af9063, type: 2}
+  _lowerBodyItem: {fileID: 11400000, guid: 1d7b32e541f938247a563797ab632237, type: 2}
+  _feetItem: {fileID: 11400000, guid: 1160699a44a9c6c48a82e14ed39ce3d7, type: 2}
+  _weaponItem: {fileID: 0}

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d817412d2a2431daaf742a23c0e3ca9, type: 3}
+  m_Name: ID-16-BlackBoots
+  m_EditorClassIdentifier: 
+  _id: 16
+  _icon:
+    m_AssetGUID: 2932647fff9189e40a62a25143f3f534
+    m_SubObjectName: Rogue_boot_l_03
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _name: Balck Boots
+  _price:
+    _type: {fileID: 11400000, guid: f953f602f2a09af4fb41f843d563ba78, type: 2}
+    _value: 50
+  _footLeftSpriteAsset:
+    m_AssetGUID: 2932647fff9189e40a62a25143f3f534
+    m_SubObjectName: Rogue_boot_l_03
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
+  _footRightSpriteAsset:
+    m_AssetGUID: d4a68b40fbf8e4046a2350c31a210fb1
+    m_SubObjectName: Rogue_boot_r_03
+    m_SubObjectType: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    m_EditorAssetChanged: 0
